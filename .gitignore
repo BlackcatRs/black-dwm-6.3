@@ -1,0 +1,5 @@
+*.o
+dwm
+black-dwm-6.3/config.h
+*~
+#*#
