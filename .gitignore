@@ -3,5 +3,6 @@ dwm
 black-dwm-6.3/config.h
 *~
 #*#
+\#*\#
 slstatus
 slstatus/config.h
