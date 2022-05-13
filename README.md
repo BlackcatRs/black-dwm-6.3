@@ -12,3 +12,4 @@ TODO :
      Increase font size
      Add padding bettween underline and tag icons
      Add eww
+     Keybinding to some action like increse volume
