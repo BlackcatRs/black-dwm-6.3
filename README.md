@@ -5,3 +5,10 @@ dwm pathes :
 slstatus
 
 dmenus
+
+
+
+TODO :
+     Increase font size
+     Add padding bettween underline and tag icons
+     Add eww
