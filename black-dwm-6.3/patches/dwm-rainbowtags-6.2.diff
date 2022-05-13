@@ -42,15 +42,18 @@ index b0b3466..c16d5f5 100644
  		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
  		if (occ & 1 << i)
  			drw_rect(drw, x + boxs, boxs, boxw, boxw,
-@@ -1568,9 +1569,14 @@ setup(void)
+@@ -1568,3 +1569,3 @@ setup(void)
  	cursor[CurResize] = drw_cur_create(drw, XC_sizing);
  	cursor[CurMove] = drw_cur_create(drw, XC_fleur);
  	/* init appearance */
+
+	/* Check for enough colors */
 +	if (LENGTH(tags) > LENGTH(tagsel))
 +		die("too few color schemes for the tags");
  	scheme = ecalloc(LENGTH(colors), sizeof(Clr *));
  	for (i = 0; i < LENGTH(colors); i++)
  		scheme[i] = drw_scm_create(drw, colors[i], 3);
+
 +	tagscheme = ecalloc(LENGTH(tagsel), sizeof(Clr *));
 +	for (i = 0; i < LENGTH(tagsel); i++)
 +		tagscheme[i] = drw_scm_create(drw, tagsel[i], 2);
