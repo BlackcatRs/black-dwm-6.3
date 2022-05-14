@@ -1,5 +1,8 @@
 /* See LICENSE file for copyright and license details. */
 
+// theme
+#include "themes/onedark.h"
+
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -9,6 +12,7 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "JetBrainsMono Nerd Font:style:medium:size=10",
                                         "Material Design Icons-Regular:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
+
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -18,6 +22,9 @@ static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_gray1,  col_cyan  },
+	/* Layout indicator's color  */
+	[SchemeLayout]     = { green,   black,  black },
+
 };
 
 /* tagging */
@@ -29,8 +36,6 @@ static const unsigned int ulinestroke	= 2;	/* thickness / height of the underlin
 static const unsigned int ulinevoffset	= 0;	/* how far above the bottom of the bar the line should appear */
 static const int ulineall 		= 0;	/* 1 to show underline on all tags, 0 for just the active ones */
 
-// theme
-#include "themes/onedark.h"
 
 static const char *tagsel[][2] = {
   { blue,    black, },
