@@ -13,3 +13,4 @@ TODO :
      Add padding bettween underline and tag icons
      Add eww
      Keybinding to some action like increse volume
+     Create separate branche for patch launcher which is acctully in current branch
