@@ -759,7 +759,7 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 		isCode = 0;
 	text = p;
 
-	w += 2; /* 1px padding on both sides */
+	w += 0; /* 1px padding on both sides */
 	ret = x = m->ww - w;
 
 	drw_setscheme(drw, scheme[LENGTH(colors)]);
@@ -862,7 +862,12 @@ drawbar(Monitor *m)
 
 
 		if (ulineall || m->tagset[m->seltags] & 1 << i) /* if there are conflicts, just move these lines directly underneath both 'drw_setscheme' and 'drw_text' :) */
-			drw_rect(drw, x + ulinepad, bh - ulinestroke - ulinevoffset, w - (ulinepad * 2), ulinestroke, 1, 0);
+			drw_rect(drw,
+				 x + ulinepad,
+				 bh - ulinestroke - ulinevoffset,
+				 w + ulinepad,
+				 ulinestroke,
+				 1, 0);
 		x += w;
 	}
 
