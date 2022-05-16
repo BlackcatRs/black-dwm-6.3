@@ -4,12 +4,14 @@
 #include "themes/onedark.h"
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 0;        /* border pixel of windows */
+static const unsigned int gappov    = 10;       /* vert outer gap between windows and screen edge */
+
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 /* static const char *fonts[]          = { "monospace:size=10" }; */
-static const char *fonts[]          = { "JetBrainsMono Nerd Font:style:Regular:size=20"};
+static const char *fonts[]          = { "JetBrainsMono Nerd Font:style:Regular:size=12"};
 static const char dmenufont[]       = "monospace:size=12";
 
 static const char col_gray1[]       = "#222222";
@@ -42,6 +44,8 @@ static const unsigned int ulinestroke	= 3;	/* thickness / height of the underlin
 static const unsigned int ulinevoffset	= 0;	/* how far above the bottom of the bar the line should appear */
 static const int ulineall 		= 0;	/* 1 to show underline on all tags, 0 for just the active ones */
 
+static const int horizpadbar        = 8;        /* horizontal padding for statusbar */
+static const int vertpadbar         = 18;        /* vertical padding for statusbar */
 
 static const char *tagsel[][2] = {
   { blue,    black, },

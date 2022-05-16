@@ -837,6 +837,8 @@ drawbar(Monitor *m)
 	int boxw = drw->fonts->h / 6 + 2;
 	unsigned int i, occ = 0, urg = 0;
 	Client *c;
+	int mw = m->ww - 10 * 2 - borderpx * 2; /* Test */
+	int bh_n = bh - borderpx * 2;
 
 	if (!m->showbar)
 		return;
@@ -844,6 +846,26 @@ drawbar(Monitor *m)
 	/* draw status first so it can be overdrawn by tags later */
 	if (m == selmon) { /* status is only drawn on selected monitor */
 		tw = m->ww - drawstatusbar(m, bh, stext);
+		/* tw = mw - drawstatusbar(m, bh_n, stext);  */
+	  	/* tw = TEXTW(stext); */
+
+		/* drw_text(drw, */
+		/* 	 m->ww - tw, */
+		/* 	 0, */
+		/* 	 tw, */
+		/* 	 bh, */
+		/* 	 lrpad / 2, */
+		/* 	 stext, 0); */
+
+		/* drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, unsigned int lpad, const char *text, int invert) */
+		/* drw_text(drw, */
+		/* 	 m->ww , /\* X *\/ */
+		/* 	 12,	     /\* Y *\/ */
+		/* 	 tw + 44,	     /\* W *\/ */
+		/* 	 bh,	     /\* H *\/ */
+		/* 	 lrpad,  /\* lpad *\/ */
+		/* 	 stext,	     /\* text *\/ */
+		/* 	 0);	     /\* invert *\/ */
 	}
 
 	/* for ( init; condition; increment ) */
@@ -863,11 +885,11 @@ drawbar(Monitor *m)
 
 		if (ulineall || m->tagset[m->seltags] & 1 << i) /* if there are conflicts, just move these lines directly underneath both 'drw_setscheme' and 'drw_text' :) */
 			drw_rect(drw,
-				 x + ulinepad,
-				 bh - ulinestroke - ulinevoffset,
-				 w + ulinepad,
-				 ulinestroke,
-				 1, 0);
+				 x + ulinepad, /* X axe */
+				 bh - ulinestroke - ulinevoffset, /* Y axe */
+				 w - ulinepad, /* Width */
+				 ulinestroke,  /* Height */
+				 1, 0);	       /* Fill and invert color */
 		x += w;
 	}
 
@@ -1699,8 +1721,12 @@ setup(void)
 	drw = drw_create(dpy, screen, root, sw, sh);
 	if (!drw_fontset_create(drw, fonts, LENGTH(fonts)))
 		die("no fonts could be loaded.");
-	lrpad = drw->fonts->h;
-	bh = drw->fonts->h + 2;
+	/* lrpad = drw->fonts->h; */
+	/* bh = drw->fonts->h + 2; */
+	lrpad = drw->fonts->h + horizpadbar;
+	bh = drw->fonts->h  + vertpadbar;
+
+
 	updategeom();
 	/* init atoms */
 	utf8string = XInternAtom(dpy, "UTF8_STRING", False);
