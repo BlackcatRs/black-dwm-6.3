@@ -67,10 +67,10 @@ static const char unknown_str[] = "n/a";
 /*                         */
 static const struct arg args[] = {
 	/* function format          argument */
-  { netspeed_rx,  "^c#b9d82f^  %s ", "wlp0s20f3" },
-  { netspeed_tx,  "^c#23efca^  %s ", "wlp0s20f3" },
+  { netspeed_rx,  "^c#b9d82f^   %s ", "wlp0s20f3" },
+  { netspeed_tx,  "^c#23efca^  %s ", "wlp0s20f3" },
   { cpu_perc,     "^c#d8bf7c^  %s%% ", NULL},
-  { ram_perc,     "^c#2c8df4^  %s%% ", NULL},
+  { ram_perc,     "^c#2c8df4^  %s%% ", NULL},
   { battery_perc, "^c#98c379^  %s%% ", "BAT1"},
   { datetime, 	  "^c#9a23ef^  %s"    , "%d %b %a - %T" }
 };
