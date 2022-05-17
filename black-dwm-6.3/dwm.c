@@ -775,8 +775,13 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 			isCode = 1;
 
 			text[i] = '\0';
+
+			/* w = TEXTW(text) - lrpad; */
+			/* drw_text(drw, x, 0, w, bh, 0, text, 0); */
+
 			w = TEXTW(text) - lrpad;
-			drw_text(drw, x, 0, w, bh, 0, text, 0);
+			drw_text(drw, x, borderpx + vertpadbar / 2, w, bh - vertpadbar, 0, text,
+				 0);
 
 			x += w;
 
@@ -805,8 +810,10 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 					int rw = atoi(text + ++i);
 					while (text[++i] != ',');
 					int rh = atoi(text + ++i);
-
-					drw_rect(drw, rx + x, ry, rw, rh, 1, 0);
+					
+					/* drw_rect(drw, rx + x, ry, rw, rh, 1, 0); */
+					drw_rect(drw, rx + x, ry + borderpx + vertpadbar / 2,
+						 rw, rh, 1, 0);
 				} else if (text[i] == 'f') {
 					x += atoi(text + ++i);
 				}
@@ -820,7 +827,8 @@ drawstatusbar(Monitor *m, int bh, char* stext) {
 
 	if (!isCode) {
 		w = TEXTW(text) - lrpad;
-		drw_text(drw, x, 0, w, bh, 0, text, 0);
+		/* drw_text(drw, x, 0, w, bh, 0, text, 0); */
+		drw_text(drw, x, borderpx + vertpadbar / 2, w, bh - vertpadbar, 0, text, 0);
 	}
 
 	drw_setscheme(drw, scheme[SchemeNorm]);
@@ -868,28 +876,31 @@ drawbar(Monitor *m)
 		/* 	 0);	     /\* invert *\/ */
 	}
 
-	/* for ( init; condition; increment ) */
+
 	for (c = m->clients; c; c = c->next) {
 		occ |= c->tags;
 		if (c->isurgent)
 			urg |= c->tags;
 	}
 
-	x = 0;
+	x = borderpx;
 	for (i = 0; i < LENGTH(tags); i++) {
 		w = TEXTW(tags[i]);
 		/* Display color on non vacant tags */
 		drw_setscheme(drw, (occ & 1 << i ? tagscheme[i] : scheme[SchemeNorm] ));
+		/* Draw tags in the bar */
 		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
 
 
 		if (ulineall || m->tagset[m->seltags] & 1 << i) /* if there are conflicts, just move these lines directly underneath both 'drw_setscheme' and 'drw_text' :) */
-			drw_rect(drw,
-				 x + ulinepad, /* X axe */
-				 bh - ulinestroke - ulinevoffset, /* Y axe */
-				 w - ulinepad, /* Width */
-				 ulinestroke,  /* Height */
-				 1, 0);	       /* Fill and invert color */
+
+		  /* Draw all tags */
+		  drw_rect(drw,
+			   x + ulinepad, /* X axe */
+			   bh - ulinestroke - ulinevoffset, /* Y axe */
+			   w - ulinepad, /* Width */
+			   ulinestroke,  /* Height */
+			   1, 0);	       /* Fill and invert color */
 		x += w;
 	}
 
@@ -1725,6 +1736,10 @@ setup(void)
 	/* bh = drw->fonts->h + 2; */
 	lrpad = drw->fonts->h + horizpadbar;
 	bh = drw->fonts->h  + vertpadbar;
+
+	/* lrpad = drw->fonts->h; */
+	/* bh = drw->fonts->h; */
+
 
 
 	updategeom();
