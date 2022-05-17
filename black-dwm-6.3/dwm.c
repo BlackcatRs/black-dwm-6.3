@@ -837,8 +837,8 @@ drawbar(Monitor *m)
 	int boxw = drw->fonts->h / 6 + 2;
 	unsigned int i, occ = 0, urg = 0;
 	Client *c;
-	int mw = m->ww - 10 * 2 - borderpx * 2; /* Test */
-	int bh_n = bh - borderpx * 2;
+	/* int mw = m->ww - 10 * 2 - borderpx * 2; /\* Test *\/ */
+	/* int bh_n = bh - borderpx * 2; */
 
 	if (!m->showbar)
 		return;
