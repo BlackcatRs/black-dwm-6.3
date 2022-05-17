@@ -883,7 +883,7 @@ drawbar(Monitor *m)
 			urg |= c->tags;
 	}
 
-	x = borderpx;
+	x = borderpx;		/* Space bettween windows */
 	for (i = 0; i < LENGTH(tags); i++) {
 		w = TEXTW(tags[i]);
 		/* Display color on non vacant tags */
