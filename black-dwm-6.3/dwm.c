@@ -854,26 +854,6 @@ drawbar(Monitor *m)
 	/* draw status first so it can be overdrawn by tags later */
 	if (m == selmon) { /* status is only drawn on selected monitor */
 		tw = m->ww - drawstatusbar(m, bh, stext);
-		/* tw = mw - drawstatusbar(m, bh_n, stext);  */
-	  	/* tw = TEXTW(stext); */
-
-		/* drw_text(drw, */
-		/* 	 m->ww - tw, */
-		/* 	 0, */
-		/* 	 tw, */
-		/* 	 bh, */
-		/* 	 lrpad / 2, */
-		/* 	 stext, 0); */
-
-		/* drw_text(Drw *drw, int x, int y, unsigned int w, unsigned int h, unsigned int lpad, const char *text, int invert) */
-		/* drw_text(drw, */
-		/* 	 m->ww , /\* X *\/ */
-		/* 	 12,	     /\* Y *\/ */
-		/* 	 tw + 44,	     /\* W *\/ */
-		/* 	 bh,	     /\* H *\/ */
-		/* 	 lrpad,  /\* lpad *\/ */
-		/* 	 stext,	     /\* text *\/ */
-		/* 	 0);	     /\* invert *\/ */
 	}
 
 
@@ -883,7 +863,7 @@ drawbar(Monitor *m)
 			urg |= c->tags;
 	}
 
-	x = borderpx;		/* Space bettween windows */
+	x = 0;		/* Bar's posisition in X axe, si x increse, bar move to right side */
 	for (i = 0; i < LENGTH(tags); i++) {
 		w = TEXTW(tags[i]);
 		/* Display color on non vacant tags */
