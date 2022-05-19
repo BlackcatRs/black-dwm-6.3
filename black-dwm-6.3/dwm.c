@@ -863,7 +863,7 @@ drawbar(Monitor *m)
 			urg |= c->tags;
 	}
 
-	x = 0;		/* Bar's posisition in X axe, si x increse, bar move to right side */
+	x = 0;		/* Bar's posisition in X axe, if x increse, bar move to right side */
 	for (i = 0; i < LENGTH(tags); i++) {
 		w = TEXTW(tags[i]);
 		/* Display color on non vacant tags */
@@ -878,7 +878,7 @@ drawbar(Monitor *m)
 		  drw_rect(drw,
 			   x + ulinepad, /* X axe */
 			   bh - ulinestroke - ulinevoffset, /* Y axe */
-			   w - ulinepad, /* Width */
+			   w - ulinewidth, /* Width */
 			   ulinestroke,  /* Height */
 			   1, 0);	       /* Fill and invert color */
 		x += w;
