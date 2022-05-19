@@ -11,8 +11,10 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 /* static const char *fonts[]          = { "monospace:size=10" }; */
-static const char *fonts[]          = { "JetBrainsMono Nerd Font:style:Regular:size=12"};
-static const char dmenufont[]       = "monospace:size=12";
+static const char *fonts[]          = { "JetBrainsMono Nerd Font:style:medium:size=11",
+                                        "Material Design Icons-Regular:size=11" };
+
+static const char dmenufont[]       = "JetBrainsMono Nerd Font:style:medium:size=11";
 
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
@@ -46,7 +48,7 @@ static const unsigned int ulinevoffset	= 3;	/* how far above the bottom of the b
 static const int ulineall 		= 0;	/* 1 to show underline on all tags, 0 for just the active ones */
 
 static const int horizpadbar        = 8;        /* horizontal padding for statusbar */
-static const int vertpadbar         = 15;        /* vertical padding for statusbar */
+static const int vertpadbar         = 14;        /* vertical padding for statusbar */
 
 static const char *tagsel[][2] = {
   { blue,    black, },
