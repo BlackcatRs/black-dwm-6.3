@@ -4,7 +4,7 @@
 #include "themes/onedark.h"
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int gappov    = 10;       /* vert outer gap between windows and screen edge */
 
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -38,12 +38,8 @@ static const Launcher launchers[] = {
     /* command     name to display */
     { chrome,         "Chrome" },
 };
-<<<<<<< HEAD
 
-static const unsigned int ulinepad	= 5;	/* horizontal padding between the underline and tag */
-=======
 static const unsigned int ulinepad	= 7;	/* horizontal padding between the underline and tag */
->>>>>>> b62c392 (Show border when window is selected)
 static const unsigned int ulinestroke	= 3;	/* thickness / height of the underline */
 static const unsigned int ulinevoffset	= 0;	/* how far above the bottom of the bar the line should appear */
 static const int ulineall 		= 0;	/* 1 to show underline on all tags, 0 for just the active ones */
