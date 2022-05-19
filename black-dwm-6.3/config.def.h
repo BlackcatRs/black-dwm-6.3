@@ -4,7 +4,7 @@
 #include "themes/onedark.h"
 
 /* appearance */
-static const unsigned int borderpx  = 0;        /* border pixel of windows */
+static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int gappov    = 10;       /* vert outer gap between windows and screen edge */
 
 static const unsigned int snap      = 32;       /* snap pixel */
