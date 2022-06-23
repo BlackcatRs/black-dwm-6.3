@@ -34,11 +34,11 @@ static const char *colors[][3]      = {
 /* static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }; */
 static char *tags[] = { "", "", "", "" , "" };
 
-static const char* chrome[] = { "emacs", NULL };
+static const char* chrome[] = { "nyxt", NULL };
 
 static const Launcher launchers[] = {
     /* command     name to display */
-    { chrome,         "Chrome" },
+    { chrome,         "爵" },
 };
 
 static const unsigned int ulinepad	= 7;	/* Underline position in X axe, increase the value move the uline to right side */

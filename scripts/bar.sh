@@ -16,23 +16,23 @@ cpu() {
 }
 
 pkg_updates() {
-  updates=12
-
-  if [ -z "$updates" ]; then
-    printf "^c$green^  Fully Updated"
-  else
-    printf "^c$green^  $updates"" updates"
-  fi
+    updates=`pacman -Sup 2> /dev/null`
+    if [ "$updates" == "" ]; then
+	printf "^c$green^  Fully Updated"
+    else
+	count=`echo "$updates" | wc -l`
+	printf "^c$green^  $count"" updates"
+    fi
 }
 
 battery() {
-  get_capacity=12
+  get_capacity="$(cat /sys/class/power_supply/BAT1/capacity)"
   printf "^c$blue^   $get_capacity"
 }
 
 brightness() {
   printf "^c$red^   "
-  printf "^c$red^%.0f\n" 12
+  printf "^c$red^%.0f\n" $(cat /sys/class/backlight/*/brightness)
 }
 
 mem() {
@@ -42,13 +42,13 @@ mem() {
 
 wlan() {
 	case "$(cat /sys/class/net/wl*/operstate 2>/dev/null)" in
-	up) printf "^c$black^ ^b$blue^ 󰤨 ^d^%s" " ^c$blue^Connected" ;;
-	down) printf "^c$black^ ^b$blue^ 󰤭 ^d^%s" " ^c$blue^Disconnected" ;;
+	up) printf "^c$black^ ^b$blue^   ^d^%s" " ^c$blue^Connected" ;;
+	down) printf "^c$black^ ^b$blue^ 睊^d^%s" " ^c$blue^Disconnected" ;;
 	esac
 }
 
 clock() {
-	printf "^c$black^ ^b$darkblue^ 󱑆 "
+	printf "^c$black^ ^b$darkblue^  "
 	printf "^c$black^^b$blue^ $(date '+%H:%M')  "
 }
 
