@@ -51,7 +51,8 @@ You can test your modification without affecting your actual dwm configuration b
 First you need  to install Xephyr: 
 
 - For Debian or Debian based systems
-    sudo apt install xserver-xephyr
+
+    `sudo apt install xserver-xephyr`
 
 - For arch
 
