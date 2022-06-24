@@ -6,7 +6,7 @@
 interval=0
 
 # load colors
-. ./bar_themes/nord
+. ~/git/black-dwm-6.3/scripts/bar_themes/nord
 
 cpu() {
   cpu_val=$(grep -o "^[^ ]*" /proc/loadavg)
