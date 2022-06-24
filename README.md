@@ -1,20 +1,15 @@
-# blackdwm (Initial look)
-<img src="https://github.com/siduck/chadwm/blob/screenshots/screenshots/initial_look.png">
-
 dwm - dynamic window manager
 ============================
 dwm is an extremely fast, small, and dynamic window manager for X.
-
+<img src="https://github.com/BlackcatRs/black-dwm-6.3/blob/01_4_notitle/img/blackdwm.png">
 
 Requirements
 ------------
 - For Debian or Debian based systems
-
-		sudo apt install make gcc libx11-dev libxft-dev libxinerama-dev xorg
+    sudo apt install make gcc libx11-dev libxft-dev libxinerama-dev xorg
 
 - For Arch
-
-		sudo pacman -S base-devel git libx11 libxft xorg-server xorg-xinit terminus-font
+   sudo pacman -S base-devel git libx11 libxft xorg-server xorg-xinit terminus-font
 
 Installation
 ------------
