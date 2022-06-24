@@ -7,11 +7,11 @@ Requirements
 ------------
 - For Debian or Debian based systems
 
-    sudo apt install make gcc libx11-dev libxft-dev libxinerama-dev xorg
+    `sudo apt install make gcc libx11-dev libxft-dev libxinerama-dev xorg`
 
 - For Arch
 
-   sudo pacman -S base-devel git libx11 libxft xorg-server xorg-xinit terminus-font
+   `sudo pacman -S base-devel git libx11 libxft xorg-server xorg-xinit terminus-font`
 
 Installation
 ------------
@@ -51,12 +51,10 @@ You can test your modification without affecting your actual dwm configuration b
 First you need  to install Xephyr: 
 
 - For Debian or Debian based systems
-
     `sudo apt install xserver-xephyr`
 
 - For arch
-
-    sudo pacman -S xorg-server-xephyr
+    `sudo pacman -S xorg-server-xephyr`
 
 Create a window or virtual environment to display dwm:
 
