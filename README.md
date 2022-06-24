@@ -28,6 +28,7 @@ Add the following line to your .xinitrc to start dwm using startx:
 
 In order to display status info in the bar, you need to specify where black-dwm is cloned in your .bashrc file:
     `### Required by status bar script ###
+    
     export DWM_PATH='~/git'`
 
 And then add the following line to run status bar script in .xinitrc file before `exec dwm` line:
