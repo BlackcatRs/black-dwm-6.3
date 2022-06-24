@@ -8,7 +8,9 @@ Requirements
 - For Debian or Debian based systems
 
     `
+
     sudo apt install make gcc libx11-dev libxft-dev libxinerama-dev xorg
+    
     `
 
 - For Arch
