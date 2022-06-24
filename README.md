@@ -1,26 +1,6 @@
-dwm pathes :
+# blackdwm (Initial look)
+<img src="https://github.com/siduck/chadwm/blob/screenshots/screenshots/initial_look.png">
 
-    dwm-status2d-6.3.diff
-
-slstatus
-
-dmenus
-
-
-
-TODO :
-     Add eww
-     Keybinding to some action like increse volume
-
-
-
-
-Xephyr -br -ac -noreset -screen 1680x1050 :1 &
-
-DISPLAY=':1' $HOME/git/suckless/black-dwm-6.3/dwm &
-make clean && make && DISPLAY=':1' $HOME/git/suckless/black-dwm-6.3/dwm
-
-DISPLAY=':1' $HOME/git/chadwm/scripts/bar.sh &
 dwm - dynamic window manager
 ============================
 dwm is an extremely fast, small, and dynamic window manager for X.
@@ -28,8 +8,13 @@ dwm is an extremely fast, small, and dynamic window manager for X.
 
 Requirements
 ------------
-In order to build dwm you need the Xlib header files.
+- For Debian or Debian based systems
 
+		sudo apt install make gcc libx11-dev libxft-dev libxinerama-dev xorg
+
+- For Arch
+
+		sudo pacman -S base-devel git libx11 libxft xorg-server xorg-xinit terminus-font
 
 Installation
 ------------
@@ -39,7 +24,7 @@ the /usr/local namespace by default).
 Afterwards enter the following command to build and install dwm (if
 necessary as root):
 
-    make clean install
+    sudo make clean install
 
 
 Running dwm
@@ -48,24 +33,37 @@ Add the following line to your .xinitrc to start dwm using startx:
 
     exec dwm
 
-In order to connect dwm to a specific display, make sure that
-the DISPLAY environment variable is set correctly, e.g.:
+In order to display status info in the bar, you need to specify where black-dwm is cloned in your .bashrc file:
+	### Required by status bar script ###
+	export DWM_PATH='~/git'
 
-    DISPLAY=foo.bar:1 exec dwm
-
-(This will start dwm on display :1 of the host foo.bar.)
-
-In order to display status info in the bar, you can do something
-like this in your .xinitrc:
-
-    while xsetroot -name "`date` `uptime | sed 's/.*,//'`"
-    do
-    	sleep 1
-    done &
-    exec dwm
-
+And then add the following line to run status bar script in .xinitrc file before `exec dwm` line:
+	exec "$(DWM_PATH)/black-dwm-6.3/scripts/bar.sh" &
 
 Configuration
 -------------
-The configuration of dwm is done by creating a custom config.h
-and (re)compiling the source code.
+The configuration of dwm is done by creating a custom config.def.h and (re)compiling the source code.
+
+	make clean && make
+
+Testing
+-------------
+You can test your modification without affecting your actual dwm configuration by setting up a virtual enviroment.
+
+First you need  to install Xephyr: 
+
+- For Debian or Debian based systems
+		sudo apt install xserver-xephyr
+
+- For arch
+
+		sudo pacman -S xorg-server-xephyr
+
+Create a window or virtual environment to display dwm:
+
+	Xephyr -br -ac -noreset -screen 1680x1050 :1 &
+
+Then run dwm inside this environment:
+
+	DISPLAY=':1' $DWM_PATH/black-dwm-6.3/dwm &
+	DISPLAY=':1' $DWM_PATH/black-dwm-6.3/scripts/bar.sh &
