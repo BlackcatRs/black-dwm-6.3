@@ -10,7 +10,10 @@ Requirements
 sudo apt install make gcc libx11-dev libxft-dev libxinerama-dev xorg
 ```
 
-- For Arch: `sudo pacman -S base-devel git libx11 libxft xorg-server xorg-xinit terminus-font`
+- For Arch:
+```
+sudo pacman -S base-devel git libx11 libxft xorg-server xorg-xinit terminus-font
+```
 
 Installation
 ------------
@@ -39,19 +42,27 @@ And then add the following line to run status bar script in .xinitrc file before
 
 Configuration
 -------------
-The configuration of dwm is done by creating a custom config.def.h and (re)compiling the source code.
+The configuration of dwm is done by creating a custom config.def.h and
+(re)compiling the source code.
 
     make clean && make
 
 Testing
 -------------
-You can test your modification without affecting your actual dwm configuration by setting up a virtual enviroment.
+You can test your modification without affecting your actual dwm
+configuration by setting up a virtual enviroment.
 
-First you need  to install Xephyr: 
+First you need to install Xephyr:
 
-- For Debian or Debian based systems: `sudo apt install xserver-xephyr`
+- For Debian or Debian based systems:
+```
+sudo apt install xserver-xephyr
+```
 
-- For arch: `sudo pacman -S xorg-server-xephyr`
+- For arch:
+```
+sudo pacman -S xorg-server-xephyr
+```
 
 Create a window or virtual environment to display dwm:
 
