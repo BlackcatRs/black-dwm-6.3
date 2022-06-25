@@ -6,7 +6,7 @@
 interval=0
 
 # load colors
-. "$(dwm_path)/black-dwm-6.3/scripts/bar_themes/nord"
+. "$DWM_PATH/black-dwm-6.3/scripts/bar_themes/nord"
 
 cpu() {
   cpu_val=$(grep -o "^[^ ]*" /proc/loadavg)
