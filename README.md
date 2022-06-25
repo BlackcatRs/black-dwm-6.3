@@ -54,15 +54,8 @@ configuration by setting up a virtual enviroment.
 
 First you need to install Xephyr:
 
-- For Debian or Debian based systems:
-```
-sudo apt install xserver-xephyr
-```
-
-- For arch:
-```
-sudo pacman -S xorg-server-xephyr
-```
+- For Debian or Debian based systems: `sudo apt install xserver-xephyr`
+- For arch: `sudo pacman -S xorg-server-xephyr`
 
 Create a window or virtual environment to display dwm:
 
