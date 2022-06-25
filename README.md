@@ -5,17 +5,18 @@ dwm is an extremely fast, small, and dynamic window manager for X.
 
 Requirements
 ------------
-- For Debian or Debian based systems: `sudo apt install make gcc libx11-dev libxft-dev libxinerama-dev xorg`
+- For Debian or Debian based systems:
+```
+sudo apt install make gcc libx11-dev libxft-dev libxinerama-dev xorg
+```
 
 - For Arch: `sudo pacman -S base-devel git libx11 libxft xorg-server xorg-xinit terminus-font`
 
 Installation
 ------------
-Edit config.mk to match your local setup (dwm is installed into
-the /usr/local namespace by default).
-
-Afterwards enter the following command to build and install dwm (if
-necessary as root):
+Edit config.mk to match your local setup (dwm is installed into the
+/usr/local namespace by default).  Afterwards enter the following
+command to build and install dwm (if necessary as root):
 
     sudo make clean install
 
