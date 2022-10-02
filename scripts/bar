@@ -27,12 +27,16 @@ pkg_updates() {
 
 battery() {
   get_capacity="$(cat /sys/class/power_supply/BAT1/capacity)"
-  printf "^c$blue^   $get_capacity"
+  printf "^c$blue^  $get_capacity"
 }
 
 brightness() {
-  printf "^c$red^   "
-  printf "^c$red^%.0f\n" $(cat /sys/class/backlight/*/brightness)
+  MAX_BRIGHTNESS=$(cat /sys/class/backlight/*/max_brightness)
+  BRIGHTNESS=$(cat /sys/class/backlight/*/brightness)
+  BRIGHTNESS_PERCENT=$((($BRIGHTNESS*100)/$MAX_BRIGHTNESS))
+
+  printf "^c$red^  "
+  printf "^c$red^%.0f\n" $BRIGHTNESS_PERCENT
 }
 
 mem() {
