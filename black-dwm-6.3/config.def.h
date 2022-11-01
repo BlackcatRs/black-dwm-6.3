@@ -95,13 +95,25 @@ static const Layout layouts[] = {
 
 /* commands */
 /* Using rofi instead of dmenu */
- static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
+static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 // static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *dmenucmd[] = { "rofi", "-show", "drun" };
 static const char *termcmd[]  = { "alacritty", NULL };
 
+/* Using 0 to indicate there is no MODKEY key to be pressed */
+#define NONE 0
+
+/* Sound */
+static const char *vol_mute[]  = { "pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle", NULL };
+static const char *vol_down[]  = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%", NULL };
+static const char *vol_up[]    = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%", NULL };
+
 static Key keys[] = {
 	/* modifier                     key        function        argument */
+        /* Specifing keysym 0x1008ff12 without using the <X11/keysym.h>  */
+	{ NONE,                         0x1008ff12,      spawn,          {.v = vol_mute } }, 
+	{ NONE,                         0x1008ff11,      spawn,          {.v = vol_down } },
+	{ NONE,                         0x1008ff13,      spawn,          {.v = vol_up } },		
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
