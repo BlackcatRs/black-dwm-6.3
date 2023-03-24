@@ -99,6 +99,8 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 // static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *dmenucmd[] = { "rofi", "-show", "drun" };
 static const char *termcmd[]  = { "alacritty", NULL };
+/* demnu script for retrieving passwords from pass */
+static const char *passmenu[]  = { "passmenu", NULL };
 
 /* Using 0 to indicate there is no MODKEY key to be pressed */
 #define NONE 0
@@ -113,9 +115,10 @@ static Key keys[] = {
         /* Specifing keysym 0x1008ff12 without using the <X11/keysym.h>  */
 	{ NONE,                         0x1008ff12,      spawn,          {.v = vol_mute } }, 
 	{ NONE,                         0x1008ff11,      spawn,          {.v = vol_down } },
-	{ NONE,                         0x1008ff13,      spawn,          {.v = vol_up } },		
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ NONE,                         0x1008ff13,      spawn,          {.v = vol_up   } },		
+	{ MODKEY,                       XK_p,            spawn,          {.v = dmenucmd } },
+	{ MODKEY|ShiftMask,             XK_Return,       spawn,          {.v = termcmd  } },
+  	{ MODKEY,                       XK_o,            spawn,          {.v = passmenu } }, 
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
