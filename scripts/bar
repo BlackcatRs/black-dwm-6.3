@@ -53,12 +53,12 @@ wlan() {
 
 today() {
     printf "^c$black^^b$darkblue^  "
-    printf "^c$black^^b$blue^ $(date '+%d:%m:%Y') ^d^ "
+    printf "^c$black^^b$blue^ $(TZ=Asia/Colombo date '+%d:%m:%Y') ^d^ "
 }
 
 clock() {
 	printf "^c$black^^b$darkblue^  "
-	printf "^c$black^^b$blue^ $(date '+%H:%M') ^d^"
+	printf "^c$black^^b$blue^ $(TZ=Asia/Colombo date '+%H:%M') ^d^"
 }
 
 vol() {
