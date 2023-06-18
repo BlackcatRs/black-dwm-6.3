@@ -1716,8 +1716,9 @@ setup(void)
 	/* lrpad = drw->fonts->h; */
 	/* bh = drw->fonts->h + 2; */
 	lrpad = drw->fonts->h + horizpadbar;
-	bh = drw->fonts->h  + vertpadbar;
-
+	// bh = drw->fonts->h  + vertpadbar;
+	
+	bh = drw->fonts->h + user_bh;
 	/* lrpad = drw->fonts->h; */
 	/* bh = drw->fonts->h; */
 
