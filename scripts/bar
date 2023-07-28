@@ -27,7 +27,7 @@ pkg_updates() {
 
 battery() {
   get_capacity="$(cat /sys/class/power_supply/BAT1/capacity)"
-  printf "^c$blue^  $get_capacity"
+  printf "^d^^c$blue^ $get_capacity"
 }
 
 brightness() {
@@ -36,7 +36,7 @@ brightness() {
   BRIGHTNESS_PERCENT=$((($BRIGHTNESS*100)/$MAX_BRIGHTNESS))
 
   printf "^c$red^  "
-  printf "^c$red^%.0f\n" $BRIGHTNESS_PERCENT
+  printf "^c$red^%.0f^d^\n" $BRIGHTNESS_PERCENT
 }
 
 mem() {
@@ -53,7 +53,7 @@ wlan() {
 
 today() {
     printf "^c$black^^b$darkblue^  "
-    printf "^c$black^^b$blue^ $(TZ=Asia/Colombo date '+%d:%m:%Y') ^d^ "
+    printf "^c$black^^b$blue^ $(TZ=Asia/Colombo date '+%d:%m:%Y') ^d^"
 }
 
 clock() {
@@ -84,5 +84,5 @@ while true; do
     [ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && updates=$(pkg_updates) && currency_value=$(currency_value)
     interval=$((interval + 1))
 
-  sleep 1 && xsetroot -name "$updates $currency_value $(battery) $(brightness) $(vol) $(cpu) $(mem) $(wlan) $(clock) $(lk_clock) $(today)"
+  sleep 1 && xsetroot -name "$(cpu) $(mem) $(wlan) | $(clock) $(today) | $(lk_clock) $currency_value |$(vol) $(battery) $(brightness) | $updates "
 done
