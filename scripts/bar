@@ -58,10 +58,10 @@ today() {
 
 clock() {
 	printf "^c$black^^b$darkblue^  "
-	printf "^c$black^^b$blue^ $(date '+%H:%M') ^d^"
+	printf "^c$black^^b$blue^ $(TZ=Europe/Paris date '+%H:%M') ^d^"
 }
 
-srilanka_clock() {
+lk_clock() {
     current_time="TZ=Asia/Colombo date +%H:%M"
     printf "^c$black^^b$darkblue^ LK "
     printf "^c$black^^b$blue^ $(TZ=Asia/Colombo date '+%H:%M') ^d^"
@@ -80,9 +80,9 @@ vol() {
 
 
 while true; do
+    # Update the value every hour
+    [ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && updates=$(pkg_updates) && currency_value=$(currency_value)
+    interval=$((interval + 1))
 
-  [ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && updates=$(pkg_updates)
-  interval=$((interval + 1))
-
-  sleep 1 && xsetroot -name "$updates $(battery) $(brightness) $(vol) $(cpu) $(mem) $(wlan) $(clock) $(srilanka_clock) $(today)"
+  sleep 1 && xsetroot -name "$updates $currency_value $(battery) $(brightness) $(vol) $(cpu) $(mem) $(wlan) $(clock) $(lk_clock) $(today)"
 done
