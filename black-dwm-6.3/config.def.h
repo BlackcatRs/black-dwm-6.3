@@ -100,8 +100,9 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 // static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *dmenucmd[] = { "rofi", "-show", "drun" };
 static const char *termcmd[]  = { "alacritty", NULL };
-/* demnu script for retrieving passwords from pass */
+/* dmenu script for retrieving passwords from pass */
 static const char *passmenu[]  = { "passmenu", NULL };
+static const char *editor[]    = {"/usr/bin/sh", "-c", "if systemctl --user is-active --quiet emacs; then /usr/bin/emacsclient -c; else /usr/bin/emacs; fi", NULL };
 
 /* Using 0 to indicate there is no MODKEY key to be pressed */
 #define NONE 0
@@ -119,7 +120,8 @@ static Key keys[] = {
 	{ NONE,                         0x1008ff13,      spawn,          {.v = vol_up   } },		
 	{ MODKEY,                       XK_p,            spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return,       spawn,          {.v = termcmd  } },
-  	{ MODKEY,                       XK_o,            spawn,          {.v = passmenu } }, 
+  	{ MODKEY,                       XK_o,            spawn,          {.v = passmenu } },
+	{ MODKEY,                       XK_e,            spawn,          {.v = editor   } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
