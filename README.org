@@ -41,7 +41,7 @@ The configuration of dwm is done by creating a custom config.def.h and (re)compi
 make clean && make
 #+end_src
 
-** Testing
+** Development
 You can test your modification without affecting your actual dwm configuration by setting up a virtual environment.
 
 First you need to install =Xephyr=:
