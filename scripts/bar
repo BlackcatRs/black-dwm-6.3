@@ -16,7 +16,7 @@ cpu() {
 }
 
 pkg_updates() {
-    updates=`pacman -Sup 2> /dev/null`
+    updates=`pacman -Syy 2> /dev/null && pacman -Sup 2> /dev/null`
     if [ "$updates" == "" ]; then
 	printf "^c$green^  Fully Updated"
     else
