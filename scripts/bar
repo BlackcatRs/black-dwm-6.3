@@ -16,12 +16,11 @@ cpu() {
 }
 
 pkg_updates() {
-    updates=`pacman -Syy 2> /dev/null && pacman -Sup 2> /dev/null`
-    if [ "$updates" == "" ]; then
+    updates=`sudo pacman -Syy 2>&1 > /dev/null && pacman -Sup 2> /dev/null | wc -l`
+    if [ "$updates" == 0 ]; then
 	printf "^c$green^  Fully Updated"
     else
-	count=`echo "$updates" | wc -l`
-	printf "^c$green^ $count"
+	printf "^c$green^ $updates"
     fi
 }
 
