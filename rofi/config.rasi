@@ -16,7 +16,9 @@ configuration{
 
 // Set transparency
 * {
-    bg: #11121D00;
+    // Last 2 digit (66) sets transparancy.
+    //00 means no transparancy.
+    bg: #11121D66;
 }
 
 element-text, element-icon , mode-switcher {
