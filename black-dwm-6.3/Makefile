@@ -37,7 +37,7 @@ dist: clean
 	rm -rf dwm-${VERSION}
 
 install: all
-	/usr/bin/ln -s $(shell pwd)/../rofi ${XDG_CONFIG_HOME}/rofi
+	/usr/bin/ln -s $(shell pwd)/../scripts/bar ${HOME}/.local/bin
 	mkdir -p ${DESTDIR}${PREFIX}/bin
 	cp -f dwm ${DESTDIR}${PREFIX}/bin
 	chmod 755 ${DESTDIR}${PREFIX}/bin/dwm

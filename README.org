@@ -13,6 +13,11 @@ sudo pacman -S base-devel git libx11 libxft xorg-server xorg-xinit terminus-font
 #+end_src
 
 ** Installation
+First we need to make sure that the ~$HOME/.local/bin~ folder is in the ~$PATH~ where the status bar script will be installed:
+#+begin_src shell
+  [ -d "$HOME/.local/bin" ] && /usr/bin/mkdir -p "$HOME/.local/bin" && PATH="$HOME/.local/bin:$PATH"
+#+end_src
+
 Edit ~config.mk~ to match your local setup (dwm is installed into the ~/usr/local~ namespace by default). Afterwards enter the following command to build and install dwm (if necessary as root):
 #+begin_src shell
 sudo make clean install
@@ -24,15 +29,9 @@ Add the following line to your ~~/.xinitrc~ to start DWM using =startx=:
 exec dwm
 #+end_src
 
-In order to display status info in the bar, you need to specify where black-dwm is cloned in your .bashrc file:
-#+begin_src sh
-### Required by status bar script ###
-export DWM_PATH='~/git'
-#+end_src
-
 And then add the following line to run status bar script in ~.xinitrc~ file before ~exec dwm~ line:
 #+begin_src shell
-exec "$(DWM_PATH)/black-dwm-6.3/scripts/bar.sh" &
+exec "$HOME/.local/bin/bar" &
 #+end_src
 
 ** Configuration
