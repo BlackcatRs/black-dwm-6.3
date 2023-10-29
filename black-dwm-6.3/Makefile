@@ -37,7 +37,8 @@ dist: clean
 	rm -rf dwm-${VERSION}
 
 install: all
-	/usr/bin/ln -s $(shell pwd)/../scripts/bar ${HOME}/.local/bin
+	/usr/bin/ln -s $(shell pwd)/../scripts/bar ${HOME}/.local/bin/
+	/usr/bin/ln -s $(shell pwd)/../scripts/bar_themes ${HOME}/.local/share/
 	mkdir -p ${DESTDIR}${PREFIX}/bin
 	cp -f dwm ${DESTDIR}${PREFIX}/bin
 	chmod 755 ${DESTDIR}${PREFIX}/bin/dwm
@@ -49,5 +50,7 @@ install: all
 uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/dwm\
 		${DESTDIR}${MANPREFIX}/man1/dwm.1
+	rm -f ${HOME}/.local/bin/bar
+	rm -rf ${HOME}/.local/share/bar_themes/
 
 .PHONY: all options clean dist install uninstall
