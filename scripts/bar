@@ -85,8 +85,8 @@ spring_clean () {
 
 while true; do
     # Update the value every hour
-    [ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && updates=$(pkg_updates) && currency_value=$(currency_value)
+    [ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && updates=$(pkg_updates) && currency_value=$(currency_value) && home_dir_count=$(spring_clean)
     interval=$((interval + 1))
 
-    sleep 1 && xsetroot -name "$(cpu) $(mem) $(wlan) | $(clock) $(today) | $(lk_clock) $currency_value |$(vol) $(battery) $(brightness) $(spring_clean) | $updates "
+    sleep 1 && xsetroot -name "$(cpu) $(mem) $(wlan) | $(clock) $(today) | $(lk_clock) $currency_value |$(vol) $(battery) $(brightness) $home_dir_count | $updates "
 done
