@@ -101,6 +101,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "rofi", "-show", "drun", NULL };
 static const char *rofi_emoji[] = { "rofi", "-show", "emoji", "-emoji-mode", "insert", NULL };
 static const char *rofi_calc[] = { "rofi", "-show", "calc", "-no-show-match", "-no-sort", NULL };
+static const char *powermenu[] = { "powermenu", NULL };
 
 static const char *termcmd[]  = { "alacritty", NULL };
 /* dmenu script for retrieving passwords from pass */
@@ -124,6 +125,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_p,            spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_r,            spawn,          {.v = rofi_emoji } },
 	{ MODKEY,                       XK_c,            spawn,          {.v = rofi_calc } },
+	{ MODKEY|ShiftMask,             XK_s,            spawn,          {.v = powermenu  } },
 	{ MODKEY|ShiftMask,             XK_Return,       spawn,          {.v = termcmd  } },
   	{ MODKEY,                       XK_o,            spawn,          {.v = passmenu } },
 	{ MODKEY,                       XK_e,            spawn,          {.v = editor   } },
