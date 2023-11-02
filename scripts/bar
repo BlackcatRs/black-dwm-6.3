@@ -66,7 +66,6 @@ lk_clock() {
     printf "^c$black^^b$blue^ $(TZ=Asia/Colombo date '+%H:%M') ^d^"
 }
 
-
 vol() {
     VOL_LEVEL=$(pactl list sinks | grep '^[[:space:]]Volume:' | head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')
     if [ $(pactl get-sink-mute @DEFAULT_SINK@ | cut -d " " -f 2) == "no" ]; then
@@ -77,11 +76,17 @@ vol() {
     
 }
 
+# Total files and folder in "$HOME"
+spring_clean () {
+    TOTAL=$(/usr/bin/exa -al | wc -l)
+    printf "^c$blue^  $TOTAL ^d^"
+}
+
 
 while true; do
     # Update the value every hour
     [ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && updates=$(pkg_updates) && currency_value=$(currency_value)
     interval=$((interval + 1))
 
-  sleep 1 && xsetroot -name "$(cpu) $(mem) $(wlan) | $(clock) $(today) | $(lk_clock) $currency_value |$(vol) $(battery) $(brightness) | $updates "
+    sleep 1 && xsetroot -name "$(cpu) $(mem) $(wlan) | $(clock) $(today) | $(lk_clock) $currency_value |$(vol) $(battery) $(brightness) $(spring_clean) | $updates "
 done
