@@ -3,8 +3,6 @@
 # ^c$var^ = fg color
 # ^b$var^ = bg color
 
-interval=0
-
 # load colors
 . "$HOME/.local/share/bar_themes/nord"
 
@@ -63,9 +61,9 @@ clock() {
 lk() {
     current_time="TZ=Asia/Colombo date +%H:%M"
     # LK time
-    printf "^d^^c$cyan2^^b$black^  ^d^%s" "^c$white^^b$grey^ $(TZ=Asia/Colombo date '+%H:%M') ";
+    printf "^d^^c$cyan2^^b$black^  ^d^%s" "^c$white^^b$grey^ $(TZ=Asia/Colombo date '+%H:%M') ^d^";
     # Function "currency_lk" is defined in ${XDG_CONFIG_HOME}/shell/env
-    printf "|^c$white^^b$grey^ $(currency_lk) ^d^";
+    printf " ^c$white^^b$grey^ $1 ^d^";
 }
 
 vol() {
@@ -85,18 +83,24 @@ spring_clean () {
 }
 
 mail() {
-    [ "$1" != "" ] && COUNT=$1 || COUNT=0
+    # Systemd "$HOME/systemd/user/mbsync.config" will sync the maildir
+    MAIL_DIR="${XDG_DATA_HOME-:$HOME/.local/share}/mail/*/Inbox/new/"
+    COUNT="$(find $MAIL_DIR -type f | wc -l)"
     printf "^c$cyan1^  $COUNT^d^"
-
 }
 
-# Run only once
-NEW_MAILS=$(mail $1)
+
+interval=0  # /1h
+mail_sync=0 # /10m
 
 while true; do
     # Update the value every hour
-    [ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && UPDATES=$(pkg_updates) && DIR_COUNT=$(spring_clean)
+    [ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && UPDATES=$(pkg_updates) && DIR_COUNT=$(spring_clean) && CURRENCY_LK=$(currency_lk)
     interval=$((interval + 1))
 
-    sleep 1 && xsetroot -name "$(cpu) $(mem) $(wlan) | $(clock) $(today) | $(lk) |$(vol) $(battery) $(brightness) |$UPDATES $DIR_COUNT $NEW_MAILS "
+    # Update the value every 10 min
+    [ $mail_sync = 0 ] || [ $(($interval % 600)) = 0 ] && MAIL_COUNT=$(mail)
+    mail_sync=$((mail_sync + 1))
+
+    sleep 1 && xsetroot -name "$(cpu) $(mem) $(wlan) | $(clock) $(today) | $(lk $CURRENCY_LK) |$(vol) $(battery) $(brightness) |$UPDATES $DIR_COUNT $MAIL_COUNT "
 done
