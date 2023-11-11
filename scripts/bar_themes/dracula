@@ -1,7 +1,6 @@
 #!/bin/dash
 
-# colors
-
+# Colors
 black=#21222c
 green=#50fa7b
 white=#f8f8f2

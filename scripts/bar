@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 
 # ^c$var^ = fg color
 # ^b$var^ = bg color
@@ -18,9 +18,9 @@ cpu() {
 pkg_updates() {
     updates=`sudo pacman -Syy 2>&1 > /dev/null && pacman -Sup 2> /dev/null | wc -l`
     if [ "$updates" == 0 ]; then
-	printf "^c$green^  Fully Updated"
+	printf ""
     else
-	printf "^c$green^ $updates"
+	printf "^c$green^  $updates^d^"
     fi
 }
 
@@ -60,10 +60,12 @@ clock() {
 	printf "^c$black^^b$blue^ $(TZ=Europe/Paris date '+%H:%M') ^d^"
 }
 
-lk_clock() {
+lk() {
     current_time="TZ=Asia/Colombo date +%H:%M"
-    printf "^c$black^^b$darkblue^ LK "
-    printf "^c$black^^b$blue^ $(TZ=Asia/Colombo date '+%H:%M') ^d^"
+    # LK time
+    printf "^d^^c$cyan2^^b$black^  ^d^%s" "^c$white^^b$grey^ $(TZ=Asia/Colombo date '+%H:%M') ";
+    # Function "currency_lk" is defined in ${XDG_CONFIG_HOME}/shell/env
+    printf "|^c$white^^b$grey^ $(currency_lk) ^d^";
 }
 
 vol() {
@@ -78,15 +80,23 @@ vol() {
 
 # Total files and folder in "$HOME"
 spring_clean () {
-    TOTAL=$(/usr/bin/exa -al | wc -l)
-    printf "^c$blue^  $TOTAL ^d^"
+    TOTAL=$(/usr/bin/exa -al $HOME | wc -l)
+    printf "^c$blue^  $TOTAL^d^"
 }
 
+mail() {
+    [ "$1" != "" ] && COUNT=$1 || COUNT=0
+    printf "^c$cyan1^  $COUNT^d^"
+
+}
+
+# Run only once
+NEW_MAILS=$(mail $1)
 
 while true; do
     # Update the value every hour
-    [ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && updates=$(pkg_updates) && currency_value=$(currency_value) && home_dir_count=$(spring_clean)
+    [ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && UPDATES=$(pkg_updates) && DIR_COUNT=$(spring_clean)
     interval=$((interval + 1))
 
-    sleep 1 && xsetroot -name "$(cpu) $(mem) $(wlan) | $(clock) $(today) | $(lk_clock) $currency_value |$(vol) $(battery) $(brightness) $home_dir_count | $updates "
+    sleep 1 && xsetroot -name "$(cpu) $(mem) $(wlan) | $(clock) $(today) | $(lk) |$(vol) $(battery) $(brightness) |$UPDATES $DIR_COUNT $NEW_MAILS "
 done
