@@ -83,23 +83,23 @@ spring_clean () {
 }
 
 mail() {
-    # Systemd "$HOME/systemd/user/mbsync.config" will sync the maildir
+    # Systemd "$HOME/systemd/user/mbsync.service" will sync the maildir
     MAIL_DIR="${XDG_DATA_HOME-:$HOME/.local/share}/mail/*/Inbox/new/"
     COUNT="$(find $MAIL_DIR -type f | wc -l)"
     printf "^c$cyan1^  $COUNT^d^"
 }
 
 
-interval=0  # /1h
-mail_sync=0 # /10m
+interval=0
+mail_sync=0 
 
 while true; do
     # Update the value every hour
     [ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && UPDATES=$(pkg_updates) && DIR_COUNT=$(spring_clean) && CURRENCY_LK=$(currency_lk)
     interval=$((interval + 1))
 
-    # Update the value every 10 min
-    [ $mail_sync = 0 ] || [ $(($interval % 600)) = 0 ] && MAIL_COUNT=$(mail)
+    # Update the value every 3 min
+    [ $mail_sync = 0 ] || [ $(($interval % 180)) = 0 ] && MAIL_COUNT=$(mail)
     mail_sync=$((mail_sync + 1))
 
     sleep 1 && xsetroot -name "$(cpu) $(mem) $(wlan) | $(clock) $(today) | $(lk $CURRENCY_LK) |$(vol) $(battery) $(brightness) |$UPDATES $DIR_COUNT $MAIL_COUNT "
