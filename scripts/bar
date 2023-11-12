@@ -85,6 +85,7 @@ spring_clean () {
 sync_maildir() {
     if [ ! `pgrep mbsync >/dev/null` ]
     then
+	export DISPLAY=:0; export XAUTHORITY=~/.Xauthority
 	/usr/bin/mbsync -a -c ${XDG_CONFIG_HOME:-$HOME/.config}/isync/mbsyncrc
 	
 	MAIL_DIR="${XDG_DATA_HOME-:$HOME/.local/share}/mail/*/Inbox/new/"
