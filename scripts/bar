@@ -82,25 +82,44 @@ spring_clean () {
     printf "^c$blue^  $TOTAL^d^"
 }
 
-mail() {
-    # Systemd "$HOME/systemd/user/mbsync.service" will sync the maildir
+sync_maildir() {
+    /usr/bin/mbsync -a -c ${XDG_CONFIG_HOME:-$HOME/.config}/isync/mbsyncrc
+
     MAIL_DIR="${XDG_DATA_HOME-:$HOME/.local/share}/mail/*/Inbox/new/"
     COUNT="$(find $MAIL_DIR -type f | wc -l)"
-    printf "^c$cyan1^  $COUNT^d^"
+
+    echo "$COUNT"
+}
+
+mail_notif() {
+    NEW_MAIL=$1
+    UNVIEWED_MAIL=$2
+    #`notify-send` requires connection to DBUS_SESSION_BUS_ADDRESS
+    # and one way is to export display and use X server authority cookies thru .Xauthority
+    # see here https://askubuntu.com/questions/298608/notify-send-doesnt-work-from-crontab
+    export DISPLAY=:0; export XAUTHORITY=~/.Xauthority
+    [ $NEW_MAIL -gt $UNVIEWED_MAIL ] && /usr/bin/notify-send "You have $NEW_MAIL new mail!"
+
+    printf "^c$cyan1^  $NEW_MAIL^d^"
 }
 
 
+# Used by function "mail_notif" to track new mails
+UNVIEWED_MAIL=0
+
+# Timer
 interval=0
-mail_sync=0 
+mail_sync=0
 
 while true; do
     # Update the value every hour
     [ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && UPDATES=$(pkg_updates) && DIR_COUNT=$(spring_clean) && CURRENCY_LK=$(currency_lk)
     interval=$((interval + 1))
 
-    # Update the value every 3 min
-    [ $mail_sync = 0 ] || [ $(($interval % 180)) = 0 ] && MAIL_COUNT=$(mail)
+    # Sync mail after 30s and then every 5 min
+    [[ $mail_sync == 30 || ( $mail_sync -ge 300  &&  $(($mail_sync % 300)) = 0 ) ]] && NEW_MAIL=$(sync_maildir) && MAIL_COUNT=$(mail_notif $NEW_MAIL $UNVIEWED_MAIL) && UNVIEWED_MAIL=$NEW_MAIL
     mail_sync=$((mail_sync + 1))
+
 
     sleep 1 && xsetroot -name "$(cpu) $(mem) $(wlan) | $(clock) $(today) | $(lk $CURRENCY_LK) |$(vol) $(battery) $(brightness) |$UPDATES $DIR_COUNT $MAIL_COUNT "
 done
