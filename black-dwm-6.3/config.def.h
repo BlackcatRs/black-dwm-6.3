@@ -107,6 +107,11 @@ static const char *termcmd[]  = { "alacritty", NULL };
 /* dmenu script for retrieving passwords from pass */
 static const char *passmenu[]  = { "passmenu", NULL };
 static const char *editor[]    = {"/usr/bin/sh", "-c", "if systemctl --user is-active --quiet emacs; then /usr/bin/emacsclient -c; else /usr/bin/emacs; fi", NULL };
+static const char *ranger[]    = {"/usr/bin/alacritty", "-e", "/usr/bin/ranger", NULL };
+
+static const char *bookmark[]    = {"bookmark", "add", NULL };
+static const char *open_url[]    = {"bookmark", "get", NULL };
+static const char *open_url_incognito[] = {"bookmark", "incognito", NULL };
 
 /* Using 0 to indicate there is no MODKEY key to be pressed */
 #define NONE 0
@@ -123,12 +128,16 @@ static Key keys[] = {
 	{ NONE,                         0x1008ff11,      spawn,          {.v = vol_down } },
 	{ NONE,                         0x1008ff13,      spawn,          {.v = vol_up   } },		
 	{ MODKEY,                       XK_p,            spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_r,            spawn,          {.v = rofi_emoji } },
-	{ MODKEY,                       XK_c,            spawn,          {.v = rofi_calc } },
+	{ MODKEY|ShiftMask,             XK_r,            spawn,          {.v = rofi_emoji } },
+	{ MODKEY,                       XK_c,            spawn,          {.v = rofi_calc  } },
 	{ MODKEY|ShiftMask,             XK_s,            spawn,          {.v = powermenu  } },
 	{ MODKEY|ShiftMask,             XK_Return,       spawn,          {.v = termcmd  } },
   	{ MODKEY,                       XK_o,            spawn,          {.v = passmenu } },
 	{ MODKEY,                       XK_e,            spawn,          {.v = editor   } },
+	{ MODKEY,                       XK_r,            spawn,          {.v = ranger   } },
+	{ MODKEY,                       XK_Insert,       spawn,          {.v = bookmark } },
+	{ MODKEY|ShiftMask,             XK_Insert,       spawn,          {.v = open_url } },
+	{ MODKEY|ShiftMask,             XK_i,            spawn,          {.v = open_url_incognito } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
