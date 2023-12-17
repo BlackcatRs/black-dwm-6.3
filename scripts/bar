@@ -95,19 +95,9 @@ sync_maildir() {
     fi    
 }
 
-mail_notif() {
-    MAIL_DIR="${XDG_DATA_HOME-:$HOME/.local/share}/mail/*/Inbox/new/"
-    UNVIEWED_MAIL="$(find $MAIL_DIR -type f | wc -l)"
-
-    NEW_MAIL=$(sync_maildir)
-
-    #`notify-send` requires connection to DBUS_SESSION_BUS_ADDRESS
-    # and one way is to export display and use X server authority cookies thru .Xauthority
-    # see here https://askubuntu.com/questions/298608/notify-send-doesnt-work-from-crontab
-    export DISPLAY=:0; export XAUTHORITY=~/.Xauthority
-    [ $NEW_MAIL -gt $UNVIEWED_MAIL ] && /usr/bin/notify-send "You have $NEW_MAIL new mail!"
-
-    printf "^c$cyan1^  $NEW_MAIL^d^"
+new_mail() {
+    NEW_MAILS=$(mu find \(flag:unread\) and \(m:/vithurshan@laposte.net/Inbox or m:/vithurshanselvarajah@gmail.com/Inbox\) --skip-dups | wc -l)
+    printf "^c$cyan1^  $NEW_MAILS^d^"
 }
 
 
@@ -120,10 +110,9 @@ while true; do
     [ $interval = 0 ] || [ $(($interval % 3600)) = 0 ] && UPDATES=$(pkg_updates) && DIR_COUNT=$(spring_clean) && CURRENCY_LK=$(currency_lk)
     interval=$((interval + 1))
 
-    # Sync mail after 30s and then every 5 min
-    [[ $mail_sync == 30 || ( $mail_sync -ge 30  &&  $(($mail_sync % 300)) = 0 ) ]] && MAIL_COUNT=$(mail_notif)
+    # Sync mail at startup and then every 15 sec
+    [ $mail_sync = 0 ] || [ $(($mail_sync % 15)) = 0  ] && MAIL_COUNT=$(new_mail)
     mail_sync=$((mail_sync + 1))
-
 
     sleep 1 && xsetroot -name "$(cpu) $(mem) $(wlan) | $(clock) $(today) | $(lk $CURRENCY_LK) |$(vol) $(battery) $(brightness) |$UPDATES $DIR_COUNT $MAIL_COUNT "
 done
