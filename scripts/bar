@@ -96,7 +96,7 @@ sync_maildir() {
 }
 
 new_mail() {
-    NEW_MAILS=$(mu find \(flag:unread\) and \(m:/vithurshan@laposte.net/Inbox or m:/vithurshanselvarajah@gmail.com/Inbox\) --skip-dups | wc -l)
+    NEW_MAILS=$(mu find \(flag:unread\) and \(m:/vithurshan@laposte.net/Inbox or m:/vithurshanselvarajah@gmail.com/Inbox\) --skip-dups 2>/dev/null | wc -l)
     printf "^c$cyan1^  $NEW_MAILS^d^"
 }
 
